@@ -1,0 +1,10 @@
+name: hurricane
+
+dependencies:
+  - python=3.10
+  - numpy
+  - toolz
+  - matplotlib
+  - pandas
+  - sympy
+  - notebook
