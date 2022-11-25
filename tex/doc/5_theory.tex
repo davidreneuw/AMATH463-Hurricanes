@@ -1,1 +1,292 @@
 \chapter{Theory}
+\section{Fluid mechanics in a rotating frame}
+\begin{minipage}{0.49\textwidth}
+    We would like to determine the mechanisms behind the generation of vorticity observed in hurricanes. Our first step will be to determine the effect of a rotating frame of reference on flow. To do so, we define an inertial frame of reference $S_I$ as well as a rotating frame of reference $S_R$ which rotates with angular velocity $\vec{\Omega}$ with respect to the inertial frame of reference. Suppose $\vec{A}$ is constant in the rotating frame of reference while $\Vec{B}(t)$ changes in the rotating frame (\ref{fig:fig1}). When looking at how both of these change in the inertial frame, we obtain:
+    \begin{align*}
+        \left(\frac{d\vec{A}}{dt}\right)_{I} &= \vec{\Omega}\cross\vec{A}
+    \end{align*}
+    As well as:
+    \begin{align}
+        \left(\frac{d\vec{B}}{dt}\right)_{I} &= \left(\frac{d\vec{B}}{dt}\right)_{R}+\vec{\Omega}\cross\vec{B}
+        \label{rule1}
+    \end{align}
+    Let us define $\vec{B}=\vec{r}$, a position vector. Then, $\frac{d\vec{B}}{dt}=\vec{u}$ such that our equation above gives:
+    \begin{align}
+        \vec{u}_I &= \vec{u}_R+\vec{\Omega}\cross\vec{r}
+        \label{rule2}
+    \end{align}
+\end{minipage}\hspace{0.05\textwidth}
+\begin{minipage}{0.49\textwidth}
+    \vspace{-2ex}
+    \begin{center}
+        \includegraphics[width=0.9\linewidth]{assets/figure-1.png}
+        \captionof{figure}{$\vec{A}$ and $\vec{\Omega}$ are constant in the rotating frame whereas $\vec{B}$ changes.}
+        \label{fig:fig1}
+    \end{center}
+\end{minipage}
+
+Applying \ref{rule1} to $\vec{u}_I$ gives:
+\begin{align*}
+    \left(\frac{d\vec{u}_I}{dt}\right)_I &= \left(\frac{d\vec{u}_I}{dt}\right)_R+\vec{\Omega}\cross\vec{u}_I
+\end{align*}
+Then, using \ref{rule2} gives:
+\begin{align*}
+    \left(\frac{d\vec{u}_I}{dt}\right)_I &= \frac{d}{dt}\left(\vec{u}_R+\vec{\Omega}\cross\vec{r}\right)_R+\vec{\Omega}\cross\left(\vec{u}_R+\vec{\Omega}\cross\vec{r}\right)_R\\
+    \left(\frac{d\vec{u}_I}{dt}\right)_I &= \left(\frac{d\vec{u}_R}{dt}\right)_R+2\vec{\Omega}\cross\vec{u}_R+\vec{\Omega}\cross\left(\vec{\Omega}\cross\vec{r}\right)
+\end{align*}
+As per Kundu \cite{cohen2004fluid} \textit{Ch. 4, section 11}, this last term may become:
+\begin{align*}
+    \vec{\Omega}\cross\left(\vec{\Omega}\cross\vec{r}\right) &= -\vec{\nabla}\phi_c
+\end{align*}
+Where:
+\begin{align*}
+    \phi_c &= \frac{\vert \vec{\Omega}\cross\vec{r}\vert^2}{2}
+\end{align*}
+Our equation therefore becomes:
+\begin{align*}
+    \vec{a}_I &= \vec{a}_R+2\vec{\Omega}\cross\vec{u}_R-\vec{\nabla}\phi_c
+\end{align*}
+Now, we input this in the Navier-Stokes equation:
+\begin{align*}
+    \rho\left(\frac{D\vec{u}_R}{Dt}+2\vec{\Omega}\cross\vec{u}_R-\vec{\nabla}\phi_c\right) &=-\vec{\nabla}p+\rho\vec{\nabla}\Phi+\mu\lap{\vec{u}_R} 
+\end{align*}
+If we redefine the gravitational potential as being:
+\begin{align*}
+    \Phi &= \phi_g+\phi_c
+\end{align*}
+Where $\phi_g$ is the gravitational potential, we get the following modified Navier-Stokes equation for a rotating frame:
+\begin{align*}
+    \rho\left(\frac{D\vec{u}}{Dt}+2\vec{\Omega}\cross\vec{u}\right) &=-\vec{\nabla}p+\rho\vec{\nabla}\Phi+\mu\lap{\vec{u}} 
+\end{align*}
+Where $\vec{u}=\vec{u}_R$. Now that we've got this, let us show the first of two mechanisms that generates vorticity during hurricane formation: \textit{geostrophic balance}.
+
+\vspace{5mm}
+\begin{minipage}{0.49\textwidth}
+    \vspace{-2ex}
+    \begin{center}
+        \includegraphics[width=0.7\linewidth]{assets/figure-2.png}
+        \captionof{figure}{Traditional $f$-plane approximation in the Northern Hemisphere}
+        \label{fig:fig2}
+    \end{center}
+\end{minipage}\hspace{0.05\textwidth}
+\begin{minipage}{0.49\textwidth}
+    Let us consider a small region on the surface of the Earth at latitude $\theta$ as shown by \ref{fig:fig2}. If we have this small region be in a rotating frame of reference with:
+    \begin{align*}
+        2\vec{\Omega} &= \left(0,f_h,f\right)
+    \end{align*}
+    Where $f$ is the coriolis parameter, such that:
+    \begin{align*}
+        f = 2\Omega\sin\theta &\qquad f_h=2\Omega\cos\theta
+    \end{align*}
+    Defining $\vec{u}=(u,v,w)$ gives us:
+    \begin{align*}
+        2\vec{\Omega}\cross\vec{u} &= (0,f_h,f)\cross(u,v,w)\\
+        &= (f_h w-fv,fu,f_h u)
+    \end{align*}
+    Let us assume that viscosity has negligible effects. We can then use each dimensions of our modified Navier-Stokes equation:
+    \begin{align*}
+        \rho \left(\frac{Du}{Dt}+f_hw-fv\right)&=-p_x\\
+        \rho \left(\frac{Dv}{Dt}+fu\right)&=-p_y\\
+        \rho\left(\frac{Dw}{Dt}+f_hu\right)&= -p_z-\rho g
+    \end{align*}
+\end{minipage}
+This approximation for large scale flows allows us to neglect $f_h$ terms:
+\begin{align}
+    \label{eqn:mom1}
+    \frac{Du}{Dt}-fv &= -\frac{1}{\rho}p_x\\
+    \label{eqn:mom2}
+    \frac{Dv}{Dt}+fu &= -\frac{1}{\rho}p_y\\
+    \frac{Dw}{Dt} &=-p_z+\rho g
+\end{align}
+And geostrophic balance indicates that the dominant balance must be:
+\begin{align}
+    -fv &= -\frac{p_x}{\rho}\\
+    fu &= -\frac{p_y}{\rho}\\
+    \label{eqn:hydrobal}
+    p_z &= -\rho g
+\end{align}
+From these, we can identify a planar flow caused by geostrophic balance:
+\begin{align*}
+    \vec{u} = (u,v) &= \frac{1}{f\rho}\left(-p_y, p_x\right)
+\end{align*}
+We see that this planar flow follows lines perpendicular to a given pressure gradient, "isobars", which are lines of constant pressure, as shown by figure \ref{fig:fig3}.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{assets/figure-3.png}
+    \caption{Geostrophic flow is created along isobars.}
+    \label{fig:fig3}
+\end{figure}
+
+When evaporation happens, high pressure appears at points where evaporation is the highest, and causes this geostrophic flow near the surface. This flow, which has other sources, is commonly referred as primary circulation.
+
+In addition, due to conservation of angular momentum, we can show that circulation is generated when a system moves in latitude. We recall the equation for circulation:
+\begin{align}
+    \label{eqn:circulation}
+    \Gamma (t) &= \iint_A \vec{\omega}\cdot \hat{n}dA = \oint_{\partial A} \vec{u}\cdot d\vec{r}
+\end{align}
+Where $A$ is an area, $\partial A$ is the boundary of that area and $d\vec{r}$ is an infinitesimal piece of the boundary directed counter-clockwise. In this way, our inertial frame and rotational frame circulations:
+\begin{align}
+    \label{eqn:incirc}
+    \Gamma_I(t) &= \oint_{\partial A} \Vec{u}_I\cdot d\Vec{r}\\
+    \Gamma_R(t) &= \oint_{\partial A} \Vec{u}_R\cdot d\Vec{r}\\
+\end{align}
+But we recall the relation between $\vec{u}_I$ and $\vec{u}_R$:
+\begin{align}
+    \label{eqn:inertrot}
+    \Vec{u}_I &= \Vec{u}_R+\Vec{\Omega}\cross\Vec{r}
+\end{align}
+Such that our inertial circulation becomes:
+\begin{align*}
+    \Gamma_I (t) &= \oint_{\partial A} (\Vec{u}_R+\Vec{\Omega}\cross\Vec{r})\cdot d\Vec{r}\\
+    \Gamma_I (t) &= \oint_{\partial A} \Vec{u}_R\cdot d\Vec{r}+\oint_{\partial A}(\Vec{\Omega}\cross\vec
+    r)\cdot d\Vec{r}\\
+    \Gamma_I (t) &= \Gamma_R (t)+ \iint_A \Vec{\nabla}\cross(\Vec{\Omega}\cross\Vec{r})\cdot\hat{n}dA\\
+    \Gamma_I (t) &= \Gamma_R (t) +\iint_A 2\Vec{\Omega}\cdot\hat{n}dA\\
+    \Gamma_I (t) &= \Gamma_R (t) +2\vert \Vec{\Omega}\vert A_{\perp}
+\end{align*}
+Where $A_{\perp}$ is the projected area of interest onto a plane perpendicular to $\Vec{\Omega}$ (in our case, a plane that goes through the equator) as demonstrated by figure \ref{fig:circulation}. If we take the time derivative:
+\begin{align*}
+    \frac{d\Gamma_I}{dt} &= \frac{d\Gamma_R}{dt}+2\vert \Vec{\Omega}\vert \frac{dA_\perp}{dt}
+\end{align*}
+\begin{minipage}{0.49\textwidth}
+    \vspace{-2ex}
+    \begin{center}
+        \includegraphics[width=\linewidth]{assets/circulation.png}
+        \captionof{figure}{Depiction of the area of interest and it's projection onto the plane perpendicular to $\Vec{\Omega}$ from \cite{holton_hakim_2019}}
+        \label{fig:circulation}
+    \end{center}
+\end{minipage}\hspace{0.05\textwidth}
+\begin{minipage}{0.49\textwidth}
+    We notice that change in projected area is a generator for inertial circulation. Now let us assume rotating circulation is constant and recall \ref{eqn:circulation} and \ref{eqn:incirc}:
+    \begin{align*}
+        \frac{d}{dt}\iint_A \Vec{\omega}_I\cdot\hat{n}dA &=  2\vert \Vec{\Omega}\vert \frac{dA_\perp}{dt}\\
+        \iint_A \frac{d\Vec{\omega}_I}{dt}\cdot\hat{n}dA &= 2\vert \Vec{\Omega}\vert \frac{dA_\perp}{dt}
+    \end{align*}
+    By taking the divergence of \ref{eqn:inertrot} we get that $\Vec{\omega}_I=\Vec{\omega}_R+2\vec{\Omega}$:
+    \begin{align*}
+        \iint_A \frac{d}{dt}\left(\Vec{\omega}_R+2\Vec{\Omega}\right)\cdot\hat{n}dA &= 2\vert \Vec{\Omega}\vert \frac{dA_\perp}{dt}\\
+        \iint_A \frac{d\vec{\omega}_R}{dt}\cdot\hat{n}dA &= 2\vert \Vec{\Omega}\vert \frac{dA_\perp}{dt}
+    \end{align*}
+\end{minipage}
+\vspace{5mm}
+
+We see from this previous equation that whenever the projected area changes, the total rotational vorticity in the area of interest must also change. As hurricanes move in latitude, their total vorticity will change.
+
+Hurricanes typically follow the path of major wind flows and will often experience beta drift, a phenomenon which causes hurricanes to move in latitude. This will indirectly increase their vorticity, as shown above.
+\section{Hurricane dynamics}
+
+\subsection{Conditions for genesis}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{assets/SSTforGlobalOcean1.jpg}
+    \caption{Sea surface temperature around the world. Black lines represent locations where the temperature is sufficiently high enough for hurricane formation (26.5°C)}
+    \label{fig:temp}
+\end{figure}
+As mentioned in the introduction, there are certain conditions that are necessary (but not sufficient) for hurricanes to form. A high-level description of these required conditions are as follow:
+\begin{enumerate}
+    \item \textit{A sea surface temperature of at least 26.5°C}. Hurricanes take their energy from the heat energy of the ocean through a mix evaporation and latent heat and as such this condition is crucial. For this reason, nearly all hurricanes grow from depressions born within the tropics. Specifically, most hurricanes that hit the east coast of the U.S. are born near the west coast of northern Africa, and grow as they are pushed westward by streams, as seen in figure \ref{fig:temp}. \cite{develop}
+    \item \textit{The proper temperature gradient in height} in order to support thunderstorm activity. \cite{develop}
+    \item \textit{Sufficient water vapor} in the middle of the troposphere. Often, the middle of the troposphere contains dry air which inhibits the formation of tropical depressions, which are what spawn hurricanes. \cite{develop}
+    \item \textit{Sufficient distance from the equator}. As mentioned in the above section on fluid mechanics in a rotated frame: the effects of conservation of angular momentum on hurricane vorticity depend on the Coriolis parameter, which increases as latitude goes away from the equator. Typically, the Coriolis Force becomes significant at about 483km above and below the equator. Outside of these bounds, cyclonic rotation becomes difficult to generate. \cite{develop}
+    \item \textit{Little vertical wind shear} from the surface towards the atmosphere. Wind shears inhibit the formation of hurricane and while it is not fully understood why, some research shows that this my be tied to point 3, as it would drag dry air in the middle of the troposphere.
+\end{enumerate}
+
+
+\subsection{Governing equations}
+
+A common way of approaching hurricane modeling is to assume axial symmetry. To take advantage of this, as described in \cite{holton_hakim_2019}, let us put Eqns. \ref{eqn:mom1} and \ref{eqn:mom2} in vector form:
+
+\begin{equation}
+    \frac{D\vec{V}}{Dt}+f\vec{k}\times\vec{V}=-\frac{1}{\rho}\vec{\nabla}p
+\end{equation}
+
+for the horizontal velocity $\vec{V}=u\vec{i}+v\vec{j}$, or alternately we can write the right hand side in terms of the geopotential using the hydrostatic equation \ref{eqn:hydrobal}:
+
+\begin{equation}
+    \frac{D\vec{V}}{Dt}+f\vec{k}\times\vec{V}=-\vec{\nabla}\Phi|_{p=const}
+    \label{eqn:momvec}
+\end{equation}
+
+% Natural coordinates consist of  $\vec{t}$, the unit vector tangential to the horizontal velocity at any point, $\vec{n}$, the unit vector normal to the horizontal velocity and to the left of the flow direction, and $\vec{k}$, the unit vector pointing directly upward. We can therefore write the horizontal velocity as $\vec{V}=V\vec{t}$, and its material derivative as 
+% \begin{equation*}
+%     \frac{D\vec{V}}{Dt}=\frac{D(V\vec{t})}{Dt}=\vec{t}\frac{DV}{Dt}+V\frac{D\vec{t}}{Dt}
+% \end{equation*}
+
+% \vspace{5mm}
+% \begin{minipage}{0.49\textwidth}
+%     \vspace{-2ex}
+%     \begin{center}
+%         \includegraphics[width=0.7\linewidth]{assets/tangentvector.jpg}
+%         \captionof{figure}{Rate of change of the tangent vector to the horizontal flow \cite{holton_hakim_2019}.}
+%         \label{fig:tangentvector}
+%     \end{center}
+% \end{minipage}\hspace{0.05\textwidth}
+% \begin{minipage}{0.49\textwidth}
+% To find $\frac{D\vec{t}}{Dt}$, consider Fig. \ref{fig:tangentvector}. We can see that
+% \begin{equation*}
+%     \delta\psi=\frac{\delta s}{R}=\frac{|\delta\vec{t}|}{\vec{t}}=|\delta\vec{t}|
+% \end{equation*}
+% since $|\vec{t}|=1$. In the limit $\delta s\rightarrow 0$,$|\delta \vec{t}|$ is parallel with $\vec{n}$, so we get 
+
+% \begin{align*}
+%     \frac{D\vec{t}}{Dt}=\frac{D\vec{t}}{Ds}\frac{Ds}{Dt}=\frac{\vec{n}}{R}V \\
+%     \frac{D\vec{V}}{Dt}=\vec{t}\frac{DV}{Dt}+\vec{n}\frac{V^2}{R}
+% \end{align*}
+% \end{minipage}
+ 
+% So then since we can express the pressure gradient term as 
+
+% \begin{equation*}
+%     -\vec{\nabla}\Phi|_{p=const}=-(\vec{t}\frac{d\Phi}
+% \end{equation*}
+
+% ========this whole section is potentially a dud because i think we only need that vector form. whoops
+
+
+
+From \ref{eqn:momvec}, we can find that in cylindrical co-ordinates (radial position $\vec{r}$, angular position $\vec{\lambda}$, vertical position $\vec{z}$)
+
+\begin{equation}
+    \frac{v_{\lambda}}{r}+fv_{\lambda}=\frac{\partial \Phi}{\partial r}
+    \label{eqn:windbalance}
+\end{equation}
+for tangential velocity $v_{\lambda}$. Under the axisymmetric assumption, we can say that the angular momentum $M=rv_{\lambda}+f\frac{r^2}{2}$ is conserved above the frictional boundary layer \cite{smith_montgomery_2017}. \cite{holton_hakim_2019} states that Eqn. \ref{eqn:windbalance} can be written as 
+
+\begin{equation}
+    \frac{M^2}{r^3}-\frac{f^2r}{4}=\frac{\partial\Phi}{\partial r}
+    \label{eqn:windbalance_mom}
+\end{equation}
+We will show this. 
+
+====== do the proof
+
+To eliminate $\frac{\partial \Phi}{\partial r}$ we can continue to follow \cite{holton_hakim_2019} in taking a quick step over from isobaric coordinates to log-pressure coordinates, i.e. where the vertical coordinate is 
+
+\begin{equation*}
+    z^*=-H\ln(p/p_s)
+\end{equation*}
+for reference pressure $p_s$ and scale height $H=RT_s/g$, where $T_s$ is a global average temperature. We can put the hydrostatic balance equation \ref{eqn:hydrobal} in terms of $\Phi= gz$ using the ideal gas law $p=\rho RT$
+
+\begin{equation*}
+    gdz = d\Phi=-\frac{RT}{p}dp=-RTd\ln p
+\end{equation*}
+so
+\begin{equation*}
+    \frac{\partial\Phi}{\partial \ln p}=-RT
+\end{equation*}
+Then finally putting into log-pressure coordinates:
+\begin{equation*}
+    \frac{\partial \Phi}{\partial z^*}=\frac{RT}{H}
+\end{equation*}
+
+We can now differentiate our relation in Eqn. \ref{eqn:windbalance_mom} with respect to $z^*$ to get a relationship between the radial temperature gradient in the hurricane and the vertical shear of the angular momentum:
+
+\begin{equation}
+    \frac{1}{r^3}\frac{\partial M^2}{\partial z^*}=\frac{R}{H}\frac{\partial T}{\partial r}
+\end{equation}
+
+%===include temperature fluctuation bit?
+
+\subsection{Intensification and boundary layer dynamics}
+
+%maybe? ==
