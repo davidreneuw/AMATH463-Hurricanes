@@ -259,7 +259,7 @@ for the horizontal velocity $\vec{V}=u\hat{\i}+v\hat{\j}$, or alternately we can
 where the gradient is taken along isobars under our assumption of geostrophic flow, so $p$ is constant. From \ref{eqn:momvec}, we can find that in cylindrical co-ordinates (radial position $\vec{r}$, angular position $\vec{\lambda}$, vertical position $\vec{z}$)
 
 \begin{equation}
-    \frac{v_{\lambda}}{r}+fv_{\lambda}=\frac{\partial \Phi}{\partial r}
+    \frac{v_{\lambda}^2}{r}+fv_{\lambda}=\frac{\partial \Phi}{\partial r}
     \label{eqn:windbalance}
 \end{equation}
 for tangential velocity $v_{\lambda}$. Under the axisymmetric assumption, we can say that the angular momentum $M=rv_{\lambda}+f\frac{r^2}{2}$ is conserved above the frictional boundary layer \cite{smith_montgomery_2017}. \cite{holton_hakim_2019} states that Eqn. \ref{eqn:windbalance} can therefore be written as 
@@ -332,11 +332,11 @@ where $s$ is the ratio of the radius $r$ to the radius of maximum winds $r_{max}
 
 Recalling from above that $M=rv_{\lambda}+f\frac{r^2}{2}$, we can investigate the relationship between the vertical wind shear and temperature, and model temperature profiles for hurricanes of this model. Substituting the definition for angular momentum into Eqn. \ref{eqn:verticalshear} and applying chain rule gives us 
 \begin{equation}
-    \frac{1}{r^3}\frac{\partial r}{\partial z^*}\frac{\partial }{\partial r}(rv_{\lambda}(r)+f\frac{r^2}{2})=\frac{R}{H}\frac{\partial T}{\partial r}
+    \frac{1}{r^3}\frac{\partial r}{\partial z^*}\frac{\partial }{\partial r}(rv_{\lambda}(r)+f\frac{r^2}{2})^2=\frac{R}{H}\frac{\partial T}{\partial r}
 \end{equation}
 or
 \begin{equation}
-    \frac{1}{r^3}\frac{\partial r}{\partial z^*}(v_{\lambda}(r)+r\frac{\partial v_{\lambda}}{\partial r}+fr)=\frac{R}{H}\frac{\partial T}{\partial r}
+    2\frac{1}{r^3}\frac{\partial r}{\partial z^*}(rv_{\lambda}(r)+f\frac{r^2}{2})(v_{\lambda}(r)+r\frac{\partial v_{\lambda}}{\partial r}+fr)=\frac{R}{H}\frac{\partial T}{\partial r}
 \end{equation}
 We clearly need a relation between $r$ and $z^*$ to know anything about $T$. Let's choose the relation between $r$ and $p$ found by \cite{Silvia2001} for the Mexican Pacific Ocean $p=3.8256r+828.7300$. Given that
 \begin{equation*}
@@ -353,7 +353,7 @@ or
 
 Let's choose $z^*=0$ for this exercise. So we have 
 \begin{equation*}
-    \frac{\partial T}{\partial r} = \frac{36.32}{r^3}(v_{\lambda}(r)+r\frac{\partial v_{\lambda}}{\partial r}+fr)
+    \frac{\partial T}{\partial r} = 2\frac{36.32}{r^3}(rv_{\lambda}(r)+f\frac{r^2}{2})(v_{\lambda}(r)+r\frac{\partial v_{\lambda}}{\partial r}+fr)
 \end{equation*}
 We can integrate this numerically. Let us assume that given we're using a relation from the Mexican Pacific Ocean that our latitude is 20 °N, so $f=2\Omega \sin\theta=4.99\times10^{-5}$ s$^{-1}$. We can then get a temperature profile for radii from 0.1 km to $r_{max}=100$ km, as shown in Fig. \ref{fig:Tplot}.
 
